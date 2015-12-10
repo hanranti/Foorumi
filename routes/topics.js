@@ -9,6 +9,7 @@ var Models = require('../models');
 // GET /topics
 router.get('/', function(req, res, next) {
     // Hae kaikki aihealueet tässä (Vinkki: findAll)
+    res.send(findAll());
     res.send(200);
 });
 
