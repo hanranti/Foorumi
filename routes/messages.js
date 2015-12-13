@@ -10,11 +10,12 @@ var Models = require('../models');
 router.get('/:id', function (req, res, next) {
     // Hae viesti tällä id:llä ja siihen liittyvät vastaukset tässä (Vinkki: findOne ja sopiva include)
     var messageId = req.params.id;
-    Models.Message().findOne({
+    Models.Message.findOne({
         where: {id: messageId},
         include: {
             model: Models.Reply
-        }})
+        }
+    })
             .then(function (message) {
                 res.json(message);
             });
@@ -28,9 +29,9 @@ router.post('/:id/reply', function (req, res, next) {
     var replyToAdd = req.body;
     // Palauta vastauksena lisätty vastaus
     replyToAdd.MessageId = messageId;
-    Models.Message.create(replyToAdd)
-            .then(function (message) {
-                res.json(message);
+    Models.Reply.create(replyToAdd)
+            .then(function (reply) {
+                res.json(reply);
             });
 });
 

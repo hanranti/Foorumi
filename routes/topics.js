@@ -51,7 +51,7 @@ router.post('/:id/message', function (req, res, next) {
     var messageToAdd = req.body;
     messageToAdd.TopicId = topicId;
     // Palauta vastauksena lisätty viesti
-    Models.Message().create(messageToAdd)
+    Models.Message.create(messageToAdd)
             .then(function (message) {
                 res.json(message);
             });
