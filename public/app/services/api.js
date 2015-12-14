@@ -19,15 +19,14 @@ FoorumApp.service('Api', function ($http) {
         return $http.get("/messages/" + id);
     }
     this.addMessage = function (message, topicId) {
-        console.log(topicId);
-        console.log(message);
         // Lisää annettu viesti lähettämällä POST-pyyntö toteuttamasi Api:n polkuun /topics/:topicId/message
-//        return $http.post("/topics/" + topicId + "/message", message);
+        return $http.post("/topics/" + topicId + "/message", message);
     }
 
     // Vastausten Api-funktiot
     this.addReply = function (reply, messageId) {
         // Lisää annettu vastaus lähettämällä POST-pyyntö toteuttamasi Api:n polkuun /messages/:messageId/reply
+        return $http.post("/messages/" + messageId + "/reply", reply);
     }
 
     // Käyttäjän Api-funktiot

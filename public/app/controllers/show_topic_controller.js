@@ -5,5 +5,10 @@ FoorumApp.controller('ShowTopicController', function ($scope, $routeParams, $loc
                 $scope.topic = data;
                 $scope.messages = data.Messages;
             });
-    $scope.addMessage = Api.addMessage($scope.newMessage, $routeParams.id);
+    $scope.addMessage = function () {
+        Api.addMessage($scope.newMessage, $routeParams.id).then(function (message) {
+            $scope.messages.push(message.data);
+            $location.path("/messages/" + message.data.id);
+        });
+    }
 });
