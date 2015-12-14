@@ -10,15 +10,20 @@ FoorumApp.service('Api', function ($http) {
     }
     this.addTopic = function (topic) {
         // Lisää annettu aihealue lähettämällä POST-pyyntö toteuttamasi Api:n polkuun /topics
-        return $http.post("/topics", {name: topic.name, description: topic.description});
+        return $http.post("/topics", topic);
     }
 
     // Viestien Api-funktiot
     this.getMessage = function (id) {
         // Hae annetulla id:llä varustettu viesti toteuttamasi Api:n polusta /messages/:id
+        return $http.get("/messages/" + id);
     }
     this.addMessage = function (message, topicId) {
+        console.log(topicId);
+        console.log(message);
         // Lisää annettu viesti lähettämällä POST-pyyntö toteuttamasi Api:n polkuun /topics/:topicId/message
+//        return $http.post("/topics/" + topicId + "/message");
+        return $http.post("/topics/");
     }
 
     // Vastausten Api-funktiot
