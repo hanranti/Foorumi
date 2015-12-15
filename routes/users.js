@@ -14,21 +14,26 @@ router.post('/', function (req, res, next) {
             username: userToAdd.username
         }
     }).then(function (user) {
-        res.status(400).json({error: 'Käyttäjätunnus on jo käytössä!'});
+        if (user != null) {
+            res.status(400).json({error: 'Käyttäjätunnus on jo käytössä!'});
+        } else {
+            Models.User.create(userToAdd).then(function (userToAdd) {
+                res.json(userToAdd);
+            });
+        }
     });
     // Palauta vastauksena lisätty käyttäjä
-    Models.User.create(userToAdd).then(function (user) {
-        res.json(user);
-    });
 });
 
 // POST /users/authenticate
 router.post('/authenticate', function (req, res, next) {
     // Tarkista käyttäjän kirjautuminen tässä. Tee se katsomalla, löytyykö käyttäjää annetulla käyttäjätunnuksella ja salasanalla (Vinkki: findOne ja sopiva where)
     var userToCheck = req.body;
+
     if (userToCheck == null || userToCheck.username == null || userToCheck.password == null) {
         res.send(403);
     }
+
     Models.User.findOne({
         where: {
             username: userToCheck.username,
@@ -36,13 +41,12 @@ router.post('/authenticate', function (req, res, next) {
         }
     }).then(function (user) {
         if (user) {
-            reg.session.userId = user.userId;
-            res.json(user);
+            req.session.userId = user.id;
+            res.json(user)
         } else {
             res.send(403);
         }
     });
-    res.send(200);
 });
 
 // GET /users/logged-in
@@ -57,8 +61,6 @@ router.get('/logged-in', function (req, res, next) {
             res.json(user);
         });
     }
-
-    res.send(200);
 });
 
 // GET /users/logout
