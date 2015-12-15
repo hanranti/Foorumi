@@ -13,7 +13,10 @@ router.get('/:id', function (req, res, next) {
     Models.Message.findOne({
         where: {id: messageId},
         include: {
-            model: Models.Reply
+            model: Models.Reply,
+            include: {
+                model: Models.User
+            }
         }
     })
             .then(function (message) {
