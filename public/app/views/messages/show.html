@@ -1,35 +1,35 @@
 <div class="page-header">
-  <h1>{{message.title}}</h1>
+    <h1>{{message.title}}</h1>
 </div>
 
 <p>
-  {{message.content}}
+    {{message.content}}
 </p>
 
 <h2>{{message.Replies.length}}</h3>
 
 <ul class="media-list" ng-repeat="reply in message.Replies">
-  <li class="media">
-    <div class="media-body">
-      <h4 class="media-heading">{{reply}}</h4>
+    <li class="media">
+        <div class="media-body">
+            <h4 class="media-heading">{{reply.User.username}}</h4>
 
-      <p>
-        {{reply.content}}
-      </p>
+            <p>
+                {{reply.content}}
+            </p>
 
-      <p class="text-muted">
-        1.1.2015 12:00
-      </p>
-    </div>
-  </li>
+            <p class="text-muted">
+                {{reply.createdAt}}
+            </p>
+        </div>
+    </li>
 </ul>
 
-<h2>Lisää oma vastauksesi</h2>
+<h2 ng-if="userLoggedIn">Lisää oma vastauksesi</h2>
 
-<form>
-  <div class="form-group">
-    <label>Vastaus</label>
-    <textarea class="form-control" ng-model="newReply.content"></textarea>
-  </div>
+<form ng-if="userLoggedIn">
+    <div class="form-group">
+        <label>Vastaus</label>
+        <textarea class="form-control" ng-model="newReply.content"></textarea>
+    </div>
     <button class="btn btn-success" ng-click="addReply()">Lisää vastaus</button>
 </form>

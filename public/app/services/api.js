@@ -40,6 +40,7 @@ FoorumApp.service('Api', function ($http) {
     }
     this.getUserLoggedIn = function () {
         // Hae kirjautunut käyttäjä toteuttamasi Api:n polusta /users/logged-in
+        return $http.get("/users/logged-in");
     }
     this.logout = function () {
         return $http.get('/users/logout');

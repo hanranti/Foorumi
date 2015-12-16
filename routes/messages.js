@@ -25,13 +25,14 @@ router.get('/:id', function (req, res, next) {
 });
 
 // POST /messages/:id/reply
-router.post('/:id/reply', function (req, res, next) {
+router.post('/:id/reply', authentication, function (req, res, next) {
     // Lisää tällä id:llä varustettuun viestiin...
     var messageId = req.params.id;
     // ...tämä vastaus (Vinkki: lisää ensin replyToAdd-objektiin kenttä MessageId, jonka arvo on messageId-muuttujan arvo ja käytä sen jälkeen create-funktiota)
     var replyToAdd = req.body;
     // Palauta vastauksena lisätty vastaus
     replyToAdd.MessageId = messageId;
+    replyToAdd.UserId = req.session.userId;
     Models.Reply.create(replyToAdd)
             .then(function (reply) {
                 res.json(reply);

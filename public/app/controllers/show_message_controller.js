@@ -5,9 +5,6 @@ FoorumApp.controller('ShowMessageController', function ($scope, $routeParams, Ap
     });
     $scope.addReply = function () {
         Api.addReply($scope.newReply, $routeParams.id).then(function (reply){
-            console.log(reply.data);
-            console.log(reply);
-            console.log($scope.message.Replies);
             $scope.message.Replies.push(reply.data);
         });
     }
