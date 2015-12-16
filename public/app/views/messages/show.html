@@ -24,9 +24,9 @@
     </li>
 </ul>
 
-<h2 ng-if="userLoggedIn">Lisää oma vastauksesi</h2>
+<h2 ng-show="userLoggedIn">Lisää oma vastauksesi</h2>
 
-<form ng-if="userLoggedIn">
+<form ng-show="userLoggedIn">
     <div class="form-group">
         <label>Vastaus</label>
         <textarea class="form-control" ng-model="newReply.content"></textarea>
