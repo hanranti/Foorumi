@@ -24,12 +24,12 @@
     </li>
 </ul>
 
-<h2 ng-show="userLoggedIn">Lisää oma vastauksesi</h2>
+<h2 ng-if="userLoggedIn">Lisää oma vastauksesi</h2>
 
-<form ng-show="userLoggedIn">
+<form ng-if="userLoggedIn">
     <div class="form-group">
         <label>Vastaus</label>
-        <textarea class="form-control" ng-model="newReply.content"></textarea>
+        <textarea class="form-control" ng-model="$parent.newReply.content"></textarea>
     </div>
     <button class="btn btn-success" ng-click="addReply()">Lisää vastaus</button>
 </form>
